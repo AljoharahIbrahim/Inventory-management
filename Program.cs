@@ -1,10 +1,7 @@
-﻿// // See https://aka.ms/new-console-template for more information
-// Console.WriteLine("Hello, World!");
-
+﻿
 public class Item
 {
-
-    public string CreatedDate { set; get; }
+    public DateTime CreatedDate { set; get; }
     public string Name { set; get; }
     public int Quantity { set; get; }
 
@@ -12,9 +9,9 @@ public class Item
     {
         Name = name;
         Quantity = quantity;
-        CreatedDate = DateTime.Now.ToString();
+        CreatedDate = DateTime.Now;
     }
-    public Item(string name, int quantity, string createdDate)
+    public Item(string name, int quantity, DateTime createdDate)
     {
         Name = name;
         Quantity = quantity;
@@ -107,17 +104,30 @@ public class Store
         return collectionList.OrderBy(item => item.Name);
     }
 
-    public IEnumerable<Item> SortByDate(){
+    public IEnumerable<Item> SortByDate()
+    {
         return collectionList.OrderBy(item => item.CreatedDate);
-        
-    }
-      public IEnumerable<Item> SortByDateDESC(){
-        return collectionList.OrderByDescending(item => item.CreatedDate);    
-    }
-    public void GroupByDate(){ //**
 
-        string currentMonth = DateTime.Now.ToString();
-         
+    }
+    public IEnumerable<Item> SortByDateDESC()
+    {
+        return collectionList.OrderByDescending(item => item.CreatedDate);
+    }
+
+    public IEnumerable<IGrouping<string, Item>> GroupByDate()
+    {
+
+        DateTime currentMonth = DateTime.Now;
+        DateTime threeMonthAgo = currentMonth.AddMonths(-3);
+        var groupedResult = collectionList.GroupBy(Item =>
+        {
+            if (Item.CreatedDate >= threeMonthAgo)
+                return "newList";
+            else
+                return "Old";
+        });
+        return groupedResult;
+
     }
 
 }
@@ -126,25 +136,56 @@ public class App
 {
     public static void Main(string[] args)
     {
-        Store store = new Store(3);
-        Item item1 = new Item("Fitem1", 5);
-        Item item2 = new Item("Atem2", 6, new DateTime(2023, 7, 1).ToString());
-        store.addItem(item1);
-        store.addItem(item2);
+        //
+        var waterBottle = new Item("Water Bottle", 10, new DateTime(2023, 1, 1));
+        var chocolateBar = new Item("Chocolate Bar", 15, new DateTime(2023, 2, 1));
+        var notebook = new Item("Notebook", 5, new DateTime(2023, 3, 1));
+        var pen = new Item("Pen", 20, new DateTime(2023, 4, 1));
+        var tissuePack = new Item("Tissue Pack", 30, new DateTime(2023, 5, 1));
+        // var chipsBag = new Item("Chips Bag", 25, new DateTime(2023, 6, 1));
+        // var sodaCan = new Item("Soda Can", 8, new DateTime(2023, 7, 1));
+        var soap = new Item("Soap", 12, new DateTime(2023, 8, 1));
+        var shampoo = new Item("Shampoo", 40, new DateTime(2023, 9, 1));
+        // var toothbrush = new Item("Toothbrush", 50, new DateTime(2023, 10, 1));
+        // var coffee = new Item("Coffee", 20);
+        // var sandwich = new Item("Sandwich", 15);
+        // var batteries = new Item("Batteries", 10);
+        // var umbrella = new Item("Umbrella", 5);
+        // var sunscreen = new Item("Sunscreen", 8);
+        Store store = new Store(15);
+        store.addItem(waterBottle);
+        store.addItem(chocolateBar);
+        store.addItem(notebook);
+        store.addItem(pen);
+        store.addItem(tissuePack);
+        store.addItem(shampoo);
+        store.addItem(soap);
+        var groupByDate = store.GroupByDate();
+        foreach (var group in groupByDate)
+        {
+            Console.WriteLine($"{group.Key} Items:");
+            foreach (var item in group)
+            {
+                Console.WriteLine($" - {item.Name}, Created: {item.CreatedDate.ToShortDateString()}");
+            }
+        }
+        //*******
+
         // // run for loop of collection to check item is added or not
         // foreach (var item in store.collectionList)
         // {
         //     Console.WriteLine($"item is print: {item.Name}");
         // }
-        // store.deleteItem(item2);
+        //*******
+        store.deleteItem(waterBottle);
         store.GetCurrentVolume();
-        store.FindItemByName("item1");
+        store.FindItemByName("Pen");
         var SortByNameAscList = store.SortByNameAsc();
         foreach (var item in SortByNameAscList)
         {
             Console.WriteLine($"{item.Name}");
         }
-         var SortByDateList = store.SortByDate();
+        var SortByDateList = store.SortByDate();
         foreach (var item in SortByNameAscList)
         {
             Console.WriteLine($"{item.CreatedDate}");
