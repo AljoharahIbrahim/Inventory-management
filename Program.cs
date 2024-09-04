@@ -7,23 +7,23 @@ public class Item
     public int Quantity { set; get; }
 
     // create constructor
-    public Item(string name, int quantity)
+
+    public Item(string name, int quantity, DateTime? createdDate = null)
     {
         Name = name;
         Quantity = quantity;
-        CreatedDate = DateTime.Now;
-    }
-    public Item(string name, int quantity, DateTime createdDate)
-    {
-        Name = name;
-        Quantity = quantity;
-        CreatedDate = createdDate;
+        CreatedDate = createdDate == null ? DateTime.Now : (DateTime)createdDate; //*covert ?
     }
 
 }
 
+public enum Sort
+{
+    ASC, DESC
+}
 public class Store
 {
+
     public List<Item> collectionList;
     private int capacity;
     public Store(int capacity)
@@ -41,7 +41,7 @@ public class Store
             if (FindItemByName(newItem.Name) == null)
             {
                 //case 1: if the item is (Not exist) and the (capacity of the list is valied) to add new items
-                if ((collectionList.Count) <= capacity)
+                if (GetCurrentVolume() <= capacity)
                 {
                     collectionList.Add(newItem);
                     Console.WriteLine($"Added item successfully");
@@ -74,34 +74,41 @@ public class Store
     {
         try
         {
-            foreach (var item in collectionList.ToList()) //* .ToList()
+            // check of the given item is exist in the collectionList
+            if (this.FindItemByName(deletedItem.Name) != null)
             {
-                // check of the given item is exist in the collectionList
-                if (item.Name == deletedItem.Name)
+                if (collectionList.Remove(deletedItem))
                 {
-                    if (collectionList.Remove(deletedItem))
-                        Console.WriteLine($"deleted item successfully");
+                    // check if the removed if successfully and the item does not exist in the list using FindItemByName
+                    if (FindItemByName(deletedItem.Name) == null)
+                    {
+                        Console.WriteLine($"deleted item {deletedItem.Name} successfully");
+                    }
                 }
+            }
+            else
+            {
+                Console.WriteLine($"we do not have this item {deletedItem.Name} in the collection List");
             }
         }
         catch (System.Exception ex)
         {
             Console.WriteLine($"Exception {ex.Message}");
-
         }
+
 
     }
 
     // method GetCurrentVolume in the collectionList
-    public void GetCurrentVolume()
+    public int GetCurrentVolume()
     {
-        double volume = 0;
+        int volume = 0;
         foreach (var item in collectionList)
         {
             // sum each quantity of the items in the collectionList
             volume += item.Quantity;
         }
-        Console.WriteLine($"Current Volume ={volume}");
+        return volume;
     }
 
     // method FindItemByName in the collectionList
@@ -113,9 +120,20 @@ public class Store
     }
 
     // method SortByNameAsc in the collectionList
-    public IEnumerable<Item> SortByNameAsc()
+
+    // user input DESC => OrderByDesc
+    // user input ASC  => OrderBy
+    // create an enum class Sort : ASC, DESC 
+    // SortByNameAsc(Sort sort)
+    // sort.ASC => => OrderByDesc
+    // sort.DESC => OrderBy
+    public IEnumerable<Item> SortByNameAsc(Sort sort)
     {
-        return collectionList.OrderBy(item => item.Name);
+        if (sort == Sort.ASC)
+        {
+            return collectionList.OrderBy(item => item.Name);
+        }
+        return collectionList.OrderByDescending(item => item.Name);
     }
 
     // method SortByDate in the collectionList
@@ -183,6 +201,7 @@ public class App
         // call deleteItem() method 
         System.Console.WriteLine("\ndelete water Bottle item\n");
         store.deleteItem(waterBottle);
+        store.deleteItem(chocolateBar);
         // call GetCurrentVolume() method 
         System.Console.WriteLine("\nGet Current Volume of the list\n");
         store.GetCurrentVolume();
@@ -199,7 +218,7 @@ public class App
         }
         // call SortByNameAscList() method 
         System.Console.WriteLine("\nSort items By Name Asc \n");
-        var SortByNameAscList = store.SortByNameAsc();
+        var SortByNameAscList = store.SortByNameAsc(Sort.ASC);
         foreach (var item in SortByNameAscList)
         {
             Console.WriteLine($"{item.Name}");

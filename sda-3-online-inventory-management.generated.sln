@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inventory", "Inventory.csproj", "{636C0F97-4B79-4D52-8AF8-21BF2AFF4D90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "classes", "classes\classes.csproj", "{72E3C4F3-E9DA-4F5B-9C41-7C71222EB265}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "week2.2", "week2.2\week2.2.csproj", "{2CAEE2F3-D088-495D-A8F3-B9A2E2F1E862}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankAccount", "BankAccount\BankAccount.csproj", "{C615CA18-84F6-42CE-981C-C1D3430A7F68}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ass3-inventory-management", "Ass3-inventory-management\Ass3-inventory-management.csproj", "{7429292C-CDDE-4B1C-90FD-B15E9E151478}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ass3-inventory-management (1)", "Ass3-inventory-management", "{9075F367-6205-4F94-83D5-5B1075194719}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inventory", "Ass3-inventory-management\sda-3-onsite-inventory-management\Inventory.csproj", "{256DB6A1-583C-4CFF-BD32-651103B3B215}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,13 +21,32 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{636C0F97-4B79-4D52-8AF8-21BF2AFF4D90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{636C0F97-4B79-4D52-8AF8-21BF2AFF4D90}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{636C0F97-4B79-4D52-8AF8-21BF2AFF4D90}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{636C0F97-4B79-4D52-8AF8-21BF2AFF4D90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72E3C4F3-E9DA-4F5B-9C41-7C71222EB265}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72E3C4F3-E9DA-4F5B-9C41-7C71222EB265}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72E3C4F3-E9DA-4F5B-9C41-7C71222EB265}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72E3C4F3-E9DA-4F5B-9C41-7C71222EB265}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CAEE2F3-D088-495D-A8F3-B9A2E2F1E862}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CAEE2F3-D088-495D-A8F3-B9A2E2F1E862}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CAEE2F3-D088-495D-A8F3-B9A2E2F1E862}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CAEE2F3-D088-495D-A8F3-B9A2E2F1E862}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C615CA18-84F6-42CE-981C-C1D3430A7F68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C615CA18-84F6-42CE-981C-C1D3430A7F68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C615CA18-84F6-42CE-981C-C1D3430A7F68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C615CA18-84F6-42CE-981C-C1D3430A7F68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7429292C-CDDE-4B1C-90FD-B15E9E151478}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7429292C-CDDE-4B1C-90FD-B15E9E151478}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7429292C-CDDE-4B1C-90FD-B15E9E151478}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7429292C-CDDE-4B1C-90FD-B15E9E151478}.Release|Any CPU.Build.0 = Release|Any CPU
+		{256DB6A1-583C-4CFF-BD32-651103B3B215}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{256DB6A1-583C-4CFF-BD32-651103B3B215}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{256DB6A1-583C-4CFF-BD32-651103B3B215}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{256DB6A1-583C-4CFF-BD32-651103B3B215}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{256DB6A1-583C-4CFF-BD32-651103B3B215} = {9075F367-6205-4F94-83D5-5B1075194719}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {41708B90-7659-44D5-A736-18372D69930E}
