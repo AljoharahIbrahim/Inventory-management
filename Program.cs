@@ -37,28 +37,32 @@ public class Store
     {
         try
         {
-            // check of the given item is exist in the collectionList
-            foreach (var item in collectionList)
+            // check of the given item is exist in the collectionList using FindItemByName method
+            if (FindItemByName(newItem.Name) == null)
             {
-                //case 1: if the item is exist will Not be added in the collectionList
-                if (item.Name == newItem.Name)
+                //case 1: if the item is (Not exist) and the (capacity of the list is valied) to add new items
+                if ((collectionList.Count) <= capacity)
                 {
-                    throw new Exception("item name already exists in our array");
+                    collectionList.Add(newItem);
+                    Console.WriteLine($"Added item successfully");
+                }
+                //case 2: if the item is (Not exist) but the (capacity of the list is Not valied) to add new items
+                else
+                {
+                    Console.WriteLine($"you dont have a valid number of capacity to added");
                 }
             }
-            //case 2: if the item is (Not exist) and the (capacity of the list is valied) to add new items
-            if ((collectionList.Count) <= capacity)
-            {
-                collectionList.Add(newItem);
-                Console.WriteLine($"Added item successfully");
-            }
-            //case 3: if the item is (Not exist) but the (capacity of the list is Not valied) to add new items
+
             else
             {
-                Console.WriteLine($"you dont have a valid number of capacity to added");
+                //case 3: if the item is exist will Not be added in the collectionList
+                throw new Exception("item name already exists in our array");
+
             }
 
         }
+
+
         catch (System.Exception ex)
         {
             Console.WriteLine($"Exception {ex.Message}");
@@ -162,7 +166,7 @@ public class App
         Store store = new Store(300);
         System.Console.WriteLine("adding list of items to the list\n");
         store.addItem(waterBottle);
-        store.addItem(chocolateBar);
+        store.addItem(waterBottle);
         store.addItem(notebook);
         store.addItem(pen);
         store.addItem(tissuePack);
